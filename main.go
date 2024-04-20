@@ -15,25 +15,22 @@ import (
 var (
 	rxPktMetric = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Name:        "rxPkts",
-			Help:        "Received pakets",
-			ConstLabels: prometheus.Labels{"location": "bedroom"},
+			Name: "rxPkts",
+			Help: "Received pakets",
 		},
 		[]string{"port"},
 	)
 	txPktMetric = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Name:        "txPkts",
-			Help:        "Transmitted pakets",
-			ConstLabels: prometheus.Labels{"location": "bedroom"},
+			Name: "txPkts",
+			Help: "Transmitted pakets",
 		},
 		[]string{"port"},
 	)
 	crcPktMetric = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Name:        "xrxPkts",
-			Help:        "Current co2 level in ppm.",
-			ConstLabels: prometheus.Labels{"location": "bedroom"},
+			Name: "crcPkts",
+			Help: "Packets dropped by switch",
 		},
 		[]string{"port"},
 	)
