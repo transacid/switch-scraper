@@ -19,6 +19,6 @@ the scraper expects two ENV variables:
 the prometheus endpoint is at `:8080/metrics`.
 ## Finally
 No guarantees, no warranty, no nothing. You are on your own.
-If you have suggestions I'm happy for pull requests. It may take a super long while till I respond. Please don't file issues, I do this in my spare time. Feel free to fork :)
+If you have suggestions I'm happy for pull requests. It may take a super long time till I respond. Please don't file issues, I do this in my spare time. Feel free to fork :)
 
 [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
