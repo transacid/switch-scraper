@@ -113,18 +113,13 @@ func (sc *scrapeClient) crunchMetrics() error {
 		return err
 	}
 
-	sc.newMetrics = nm
-	if sc.curMetrics == nil {
-		sc.curMetrics = sc.newMetrics
+	sc.metric = nm
+
+	for port := range sc.metric {
+		rxPktMetric.WithLabelValues(strconv.Itoa(port)).Set(sc.metric[port].rxPkt)
+		txPktMetric.WithLabelValues(strconv.Itoa(port)).Set(sc.metric[port].txPkt)
+		crcPktMetric.WithLabelValues(strconv.Itoa(port)).Set(sc.metric[port].crcPkt)
 	}
-	for port := range sc.curMetrics {
-		rxdelta := sc.newMetrics[port].rxPkt - sc.curMetrics[port].rxPkt
-		rxPktMetric.WithLabelValues(strconv.Itoa(port)).Add(rxdelta)
-		txdelta := sc.newMetrics[port].txPkt - sc.curMetrics[port].txPkt
-		txPktMetric.WithLabelValues(strconv.Itoa(port)).Add(txdelta)
-		crcdelta := sc.newMetrics[port].crcPkt - sc.curMetrics[port].crcPkt
-		crcPktMetric.WithLabelValues(strconv.Itoa(port)).Add(crcdelta)
-	}
-	sc.curMetrics = sc.newMetrics
+
 	return nil
 }

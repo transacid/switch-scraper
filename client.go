@@ -14,12 +14,11 @@ import (
 )
 
 type scrapeClient struct {
-	client     *http.Client
-	password   string
-	remote     string
-	logger     *slog.Logger
-	curMetrics map[int]Port
-	newMetrics map[int]Port
+	client   *http.Client
+	password string
+	remote   string
+	logger   *slog.Logger
+	metric   map[int]Port
 }
 
 func NewScrapeClient() (*http.Client, error) {

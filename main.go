@@ -13,22 +13,22 @@ import (
 )
 
 var (
-	rxPktMetric = prometheus.NewCounterVec(
-		prometheus.CounterOpts{
+	rxPktMetric = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
 			Name: "rxPkts",
 			Help: "Received pakets",
 		},
 		[]string{"port"},
 	)
-	txPktMetric = prometheus.NewCounterVec(
-		prometheus.CounterOpts{
+	txPktMetric = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
 			Name: "txPkts",
 			Help: "Transmitted pakets",
 		},
 		[]string{"port"},
 	)
-	crcPktMetric = prometheus.NewCounterVec(
-		prometheus.CounterOpts{
+	crcPktMetric = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
 			Name: "crcPkts",
 			Help: "Packets dropped by switch",
 		},
@@ -87,5 +87,4 @@ func main() {
 		logger.Error(err.Error())
 		panic(err)
 	}
-
 }
