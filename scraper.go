@@ -116,9 +116,9 @@ func (sc *scrapeClient) crunchMetrics() error {
 	sc.metric = nm
 
 	for port := range sc.metric {
-		rxPktMetric.WithLabelValues(strconv.Itoa(port)).Set(sc.metric[port].rxPkt)
-		txPktMetric.WithLabelValues(strconv.Itoa(port)).Set(sc.metric[port].txPkt)
-		crcPktMetric.WithLabelValues(strconv.Itoa(port)).Set(sc.metric[port].crcPkt)
+		rxPktMetric.WithLabelValues(strconv.Itoa(port), sc.location).Set(sc.metric[port].rxPkt)
+		txPktMetric.WithLabelValues(strconv.Itoa(port), sc.location).Set(sc.metric[port].txPkt)
+		crcPktMetric.WithLabelValues(strconv.Itoa(port), sc.location).Set(sc.metric[port].crcPkt)
 	}
 
 	return nil

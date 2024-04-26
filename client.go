@@ -17,6 +17,7 @@ type scrapeClient struct {
 	client   *http.Client
 	password string
 	remote   string
+	location string
 	logger   *slog.Logger
 	metric   map[int]Port
 }

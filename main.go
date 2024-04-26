@@ -18,21 +18,21 @@ var (
 			Name: "rxPkts",
 			Help: "Received pakets",
 		},
-		[]string{"port"},
+		[]string{"port", "location"},
 	)
 	txPktMetric = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name: "txPkts",
 			Help: "Transmitted pakets",
 		},
-		[]string{"port"},
+		[]string{"port", "location"},
 	)
 	crcPktMetric = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name: "crcPkts",
 			Help: "Packets dropped by switch",
 		},
-		[]string{"port"},
+		[]string{"port", "location"},
 	)
 )
 
@@ -48,6 +48,10 @@ func main() {
 	if !ok {
 		panic("PASSWORD not set")
 	}
+	location, ok := os.LookupEnv("LOCATION")
+	if !ok {
+		panic("LOCATION not set")
+	}
 	var sc scrapeClient
 	client, err := NewScrapeClient()
 	if err != nil {
@@ -55,6 +59,7 @@ func main() {
 	}
 	sc.client = client
 	sc.remote = remoteIp
+	sc.location = location
 	sc.password = passwd
 	sc.logger = logger
 
@@ -66,6 +71,7 @@ func main() {
 			collectors.WithGoCollectorRuntimeMetrics(collectors.MetricsAll),
 			collectors.WithoutGoCollectorRuntimeMetrics(collectors.MetricsGC.Matcher),
 		),
+		collectors.NewProcessCollector(collectors.ProcessCollectorOpts{}),
 		rxPktMetric,
 		txPktMetric,
 		crcPktMetric,
