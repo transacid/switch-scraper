@@ -1,3 +1,4 @@
-switch-monitor
 samples
 .vscode
+switch-scraper
+!charts/**

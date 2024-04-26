@@ -1,4 +1,4 @@
-module switch-monitor
+module github.com/transacid/switch-scraper
 
 go 1.22.2
 

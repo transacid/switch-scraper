@@ -3,9 +3,9 @@ WORKDIR /workdir
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 COPY *.go ./
-RUN CGO_ENABLED=0 go build -v -trimpath -o switch-monitor .
+RUN CGO_ENABLED=0 go build -v -trimpath -o switch-scraper .
 
 FROM scratch
-COPY --from=builder /workdir/switch-monitor ./
+COPY --from=builder /workdir/switch-scraper ./
 EXPOSE 8080
-ENTRYPOINT [ "/switch-monitor" ]
+ENTRYPOINT [ "/switch-scraper" ]
