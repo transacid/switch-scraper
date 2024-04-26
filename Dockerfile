@@ -4,7 +4,7 @@ WORKDIR /workdir
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 COPY *.go ./
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETARCH go build -v -trimpath -o switch-scraper .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETARCH go build -trimpath -o switch-scraper .
 
 FROM scratch
 COPY --from=builder /workdir/switch-scraper ./
