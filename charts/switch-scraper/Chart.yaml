@@ -1,0 +1,13 @@
+apiVersion: v2
+name: switch-scraper
+description: A Helm chart for switch-scraper
+home: https://github.com/transacid/switch-scraper
+maintainers:
+  - name: Boris Petersen
+    email: bp@boris-petersen.de
+sources:
+  - "https://github.com/transacid/switch-scraper"
+
+type: application
+version: 0.0.1
+appVersion: "0.0.1"
