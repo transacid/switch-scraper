@@ -34,6 +34,20 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          {{- $fullName := include "switch-scraper.fullname" . -}}
+          {{- range $name, $value := .Values.env -}}
+            {{- if eq $name "PASSWORD" }}
+            - name: {{ $name }}
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: {{ $fullName }}-password
+            {{- else }}
+            - name: {{ $name }}
+              value: {{ $value }}
+            {{- end }}
+          {{- end }}
           ports:
             - name: prom-exporter
               containerPort: {{ .Values.service.port }}

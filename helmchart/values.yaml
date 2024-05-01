@@ -14,6 +14,14 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+env:
+  # this is the IP of the switch
+  REMOTE_IP: "127.0.0.1"
+  # where your switch is physically located
+  LOCATION: livingroom
+
+  # the password used to authenticate against the webUI
+  PASSWORD: ChAnGe_Me
 serviceAccount:
   # Specifies whether a service account should be created
   create: false
