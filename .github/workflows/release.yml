@@ -18,10 +18,28 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - id: compute_tag
+        uses: craig-day/compute-tag@v18
+        with:
+          github_token: ${{ github.token }}
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: stable
+          go-version: "1.22.2"
+      - name: bump chart
+        run: |
+          sed -iE "s/appVersion: \"([0-9].[0-9].[0-9])\"/appVersion: \"${steps.compute_tag.outputs.next_tag}\"" helmchart/Chart.yaml
+      - name: commit chart bumb
+        uses: EndBug/add-and-commit@v9
+        with:
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
+          message: "chore(chart) bump"
+      - name: tag
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          WITH_V: true
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v5
         with:
