@@ -2,3 +2,4 @@ samples
 .vscode
 switch-scraper
 !charts/**
+dist/
