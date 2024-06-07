@@ -14,6 +14,9 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+####################
+# CHANGE THESE vvv #
+####################
 env:
   # this is the IP of the switch
   REMOTE_IP: "127.0.0.1"
@@ -22,6 +25,12 @@ env:
 
   # the password used to authenticate against the webUI
   PASSWORD: ChAnGe_Me
+# this must be uniq per scraper (when running on the same node)
+port: 9110
+####################
+# CHANGE THESE ^^^ #
+####################
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: false
@@ -47,9 +56,6 @@ securityContext: {}
 # runAsNonRoot: true
 # runAsUser: 1000
 
-service:
-  type: ClusterIP
-  port: 8080
 
 podMonitor:
   # podMonitor.enabled -- If true, create a PodMonitor for Vector.
