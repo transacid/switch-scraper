@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
@@ -52,6 +53,10 @@ func main() {
 	if !ok {
 		panic("LOCATION not set")
 	}
+	port, ok := os.LookupEnv("PORT")
+	if !ok {
+		panic("LOCATION not set")
+	}
 	var sc scrapeClient
 	client, err := NewScrapeClient()
 	if err != nil {
@@ -88,7 +93,7 @@ func main() {
 	}()
 
 	http.Handle("/metrics", promhttp.HandlerFor(reg, promhttp.HandlerOpts{Registry: reg}))
-	err = http.ListenAndServe(":8080", nil)
+	err = http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 	if err != nil {
 		logger.Error(err.Error())
 		panic(err)
