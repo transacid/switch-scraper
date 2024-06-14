@@ -15,9 +15,10 @@ the scraper expects two ENV variables:
 | --------- | --------------------------------------------------- |
 | REMOTE_IP | this is the IP of the switch                        |
 | PASSWORD  | the password used to authenticate against the webUI |
+| PORT      | the hostPort the scraper should listen on           |
 | LOCATION  | where your switch is physically located             |
 
-the prometheus endpoint is at `:8080/metrics`.
+the prometheus endpoint is at `:<PORT>/metrics`.
 ## Finally
 No guarantees, no warranty, no nothing. You are on your own.
 If you have suggestions I'm happy for pull requests. It may take a super long time till I respond. Please don't file issues, I do this in my spare time. Feel free to fork :)
