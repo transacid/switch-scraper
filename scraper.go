@@ -19,7 +19,7 @@ type Port struct {
 
 func marshalPorts(readings []string) map[int]Port {
 	var portReadings = make(map[int]Port)
-	pn := 1
+	portNumber := 1
 	var port Port
 	for i := 0; i < len(readings); i++ {
 		if i%3 == 0 {
@@ -32,8 +32,8 @@ func marshalPorts(readings []string) map[int]Port {
 		} else if i%3 == 2 {
 			pr, _ := strconv.ParseInt(readings[i], 16, 0)
 			port.crcPkt = float64(pr)
-			portReadings[pn] = port
-			pn++
+			portReadings[portNumber] = port
+			portNumber++
 		}
 	}
 	return portReadings
