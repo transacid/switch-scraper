@@ -55,7 +55,7 @@ func main() {
 	}
 	port, ok := os.LookupEnv("PORT")
 	if !ok {
-		panic("LOCATION not set")
+		panic("PORT not set")
 	}
 	var sc scrapeClient
 	client, err := NewScrapeClient()
