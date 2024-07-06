@@ -9,5 +9,5 @@ sources:
   - "https://github.com/transacid/switch-scraper"
 
 type: application
-version: 0.1.1
-appVersion: "v0.0.8"
+version: 0.1.2
+appVersion: "v0.0.9"
