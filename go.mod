@@ -3,7 +3,7 @@ module github.com/transacid/switch-scraper
 go 1.23
 
 require (
-	github.com/prometheus/client_golang v1.20.1
+	github.com/prometheus/client_golang v1.20.3
 	golang.org/x/net v0.28.0
 )
 
