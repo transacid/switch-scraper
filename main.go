@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log/slog"
 	"net/http"
@@ -87,6 +88,10 @@ func main() {
 			err := sc.crunchMetrics()
 			if err != nil {
 				logger.Error(err.Error())
+				if errors.Is(err, redirLoginPage) {
+					logger.Error("login error, backing off")
+					time.Sleep(5 * time.Minute)
+				}
 			}
 			time.Sleep(10 * time.Second)
 		}

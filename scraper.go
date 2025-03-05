@@ -11,6 +11,8 @@ import (
 	"golang.org/x/net/html"
 )
 
+var redirLoginPage = errors.New("redirect to loginpage")
+
 type Port struct {
 	rxPkt  float64
 	txPkt  float64
@@ -48,7 +50,7 @@ func extractReadings(body io.Reader) ([]string, error) {
 	}
 	bod2, _ := io.ReadAll(&buf)
 	if bytes.Contains(bod2, []byte("RedirectToLoginPage")) {
-		return nil, errors.New("redirect to loginpage")
+		return nil, redirLoginPage
 	}
 	var readings []string
 	var page func(*html.Node)
