@@ -23,7 +23,7 @@ func marshalPorts(readings []string) map[int]Port {
 	var portReadings = make(map[int]Port)
 	portNumber := 1
 	var port Port
-	for i := 0; i < len(readings); i++ {
+	for i := range readings {
 		if i%3 == 0 {
 			port = Port{}
 			pr, _ := strconv.ParseInt(readings[i], 16, 0)
