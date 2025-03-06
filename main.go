@@ -88,7 +88,7 @@ func main() {
 			err := sc.crunchMetrics()
 			if err != nil {
 				logger.Error(err.Error())
-				if errors.Is(err, redirLoginPage) {
+				if errors.Is(err, errRedirLoginPage) {
 					logger.Error("login error, backing off")
 					time.Sleep(5 * time.Minute)
 				}
